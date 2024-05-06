@@ -1,0 +1,205 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../main.tex
+% !TEX spellcheck = en-US
+% ****************************************************************************************
+% File: _preamble.tex
+% Author: Gadner, Haselwanter
+% Date: 2022-09-14
+% ****************************************************************************************
+
+% ****************************************************************************************
+% General settings (input encoding, font encoding, font, language)
+% ****************************************************************************************
+\usepackage[utf8]{inputenc} % character encoding used in input file
+\usepackage[T1]{fontenc} % specifies the encoding used in the fonts
+\usepackage{lmodern} % provides more support for non-ASCII characters than cm-super
+\usepackage{microtype} % improves line-filling when using PDFLaTeX
+\usepackage[ngerman,english]{babel} %  last language is considered the main one
+%\renewcommand{\familydefault}{\sfdefault} % select a sans serif font family 
+
+\pdfsuppresswarningpagegroup=1 % suppress warning when including PDFs with page groups
+
+% ****************************************************************************************
+% Basic macros for document
+% ****************************************************************************************
+\newcommand{\docTitle}{Titlexxx}
+\newcommand{\docType}{Course materials}
+\newcommand{\docStudy}{Mechatronics - Engineering}
+\newcommand{\docAuthor}{}
+
+
+% Definition of BibTeX macro used in IEEEexample
+\newcommand{\BibTeX}{BibTeX}
+% ****************************************************************************************
+% Drawing and plotting, scientific packages, 
+% ****************************************************************************************
+\usepackage{float}
+
+% For use of subfigure environment
+\usepackage{subcaption}
+
+% For use of cmidrule in table environment
+\usepackage{booktabs}
+
+\usepackage{makecell}
+
+% Handling of images
+\usepackage{graphicx}
+\graphicspath{{./img/}}
+
+% Colour support
+\usepackage[table]{xcolor}
+
+% Handling of MATLAB code
+\usepackage{mcode}
+
+% Tabulars with adjustable-width columns
+\usepackage{tabularx}
+\usepackage{multirow}
+
+% Sketching and importing MATLAB plots
+\usepackage{pgfplots}
+\usepackage{grffile}
+\pgfplotsset{compat=newest}
+\usetikzlibrary{plotmarks}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{patterns}
+\usetikzlibrary{decorations.pathreplacing}
+\usepgfplotslibrary{patchplots}
+
+\pgfplotsset{plot coordinates/math parser=false}
+\newlength\figureheight
+\newlength\figurewidth
+
+% Typesetting electrical networks
+\usepackage{circuitikz}
+
+% scientific packages
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{siunitx}
+\AtBeginDocument{\sisetup{
+	mode=match,
+	unit-font-command = \mathrm,
+	reset-text-family=false,
+	reset-text-series=false,
+	reset-text-shape=false,
+	exponent-product=\cdot
+}}
+\DeclareSIUnit\unity{1} % can be used for dimensionless quantities
+\DeclareSIUnit{\inch}{\text{''}}
+\DeclareSIUnit{\rackunit}{\text{U}}
+% ****************************************************************************************
+% Referencing and citing
+% ****************************************************************************************
+% Caption settings
+\usepackage[
+	format=plain, % typeset as normal paragraph
+	labelformat=simple, % typeset label as name and number
+	labelsep=period, % caption label and text separated by period and space
+	textformat=simple, % caption text typeset as is
+	justification=justified, % typset caption as normal paragraph
+	singlelinecheck=true, % automatically center short captions
+	font=small,
+	labelfont=bf, % set bold font for label
+	width=.75\textwidth % set fixed width for caption
+]{caption}
+\captionsetup[table]{position=top}
+\captionsetup[figure]{position=bottom}
+
+% Hypertext marks (should be loaded last but before geometry)
+\usepackage[hyperindex]{hyperref}
+% Extension options
+\hypersetup{
+	colorlinks, % colours the text of links and anchors (instead of borders)
+	linkcolor={blue!65!black},
+	citecolor={blue!65!black},
+	urlcolor={blue!65!black}
+}
+% PDF display and information options
+\hypersetup{
+	pdftitle={\docTitle},
+	pdfsubject={\docType},
+	pdfauthor={\docAuthor},
+	pdfkeywords={thesis, boost converter},
+	pdfcreator={pdflatex},
+	pdfproducer={LaTeX with hyperref}
+}
+
+% formatting of cross-references
+\usepackage[capitalise]{cleveref}
+\crefformat{equation}{(#2#1#3)}
+\Crefformat{equation}{Equation~(#2#1#3)}
+
+% ****************************************************************************************
+% Bibliography settings
+% ****************************************************************************************
+% template from https://www.ieee.org/conferences/publishing/templates.html
+\bibliographystyle{IEEEtran} % choose the reference style
+
+% ****************************************************************************************
+% Glossary (acronyms, list of symbols) settings
+% ****************************************************************************************
+\usepackage[acronym,nomain,nonumberlist,nopostdot,sort=def,toc]{glossaries}
+\renewcommand*{\glstextformat}[1]{\textcolor{black}{#1}} % make links appear black
+\newglossary[slg]{symbolslist}{syi}{syg}{List of Symbols} % define custom glossary
+\glsaddkey% define custom key
+	{unit}% key
+	{\glsentrytext{\glslabel}}% default value
+	{\glsentryunit}% command analogous to \glsentrytext
+	{\GLsentryunit}% command analogous to \Glsentrytext
+	{\glsunit}% command analogous to \glstext
+	{\Glsunit}% command analogous to \Glstext
+	{\GLSunit}% command analogous to \GLStext
+\glssetnoexpandfield{unit}
+\makeglossaries % create makeindex files
+
+\newglossarystyle{symbolsliststyle}{%
+	\setglossarystyle{long3col}% style based on long3col
+	\renewenvironment{theglossary}{%
+		\begin{longtable}{lp{\glsdescwidth}>{\arraybackslash}p{2cm}}}%
+		{\end{longtable}}%
+	\renewcommand*{\glossaryheader}{% change the table header
+		\bfseries Symbol & \bfseries Description & \bfseries Unit\\\hline%
+		\endhead}%
+	\renewcommand*{\glossentry}[2]{% change the displayed items
+		\glstarget{##1}{\glossentryname{##1}}% name
+		& \glossentrydesc{##1}% description
+		& $\glsentryunit{##1}$% unit
+		\tabularnewline
+	}%
+}
+
+% ****************************************************************************************
+% Page layout and headers
+% ****************************************************************************************
+% Specify page layout (paper name and orientation specified in document class options)
+\usepackage[
+	includeheadfoot, % includes the head of the page into total body
+	ignoremp, % disregards marginal notes in determining the horizontal margins
+	nomarginpar, % shrinks spaces for marginal notes to 0pt
+	hmargin=1.5in, % left and right margin
+	vmargin=1in, % top and bottom margin
+	headheight=14pt %  height of header
+]{geometry}
+
+\usepackage{parskip} % helps in implementing paragraph layouts
+
+% Header and footer settings
+\usepackage{fancyhdr}
+\pagestyle{fancy} % set page style to 'fancy'
+\renewcommand{\chaptermark}[1]{\markboth{\thechapter.\ #1}{}}
+% \renewcommand{\sectionmark}[1]{\markright{\thesection.\ #1}}
+\fancyhf{} % clear all header and footer fields
+\fancyhead[L]{\leftmark} % set left header location (chapter)
+% \fancyhead[R]{\rightmark} % set right header location (section)
+\fancyfoot[C]{\thepage} % set center footer location (page count)
+
+% ****************************************************************************************
+% Packages for testing purposes (can be deleted)
+% ****************************************************************************************
+\usepackage{lipsum}
+\usepackage[first=1, last=6]{lcg}
+\usepackage{blindtext}
+% EOF

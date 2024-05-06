@@ -1,0 +1,46 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = main.tex
+% !TEX spellcheck = en-US
+% ****************************************************************************************
+% File: main.tex
+% Author: Gadner, Haselwanter
+% Date: 2022-09-14
+% ****************************************************************************************
+\documentclass[a4paper,11pt,oneside,final,titlepage,openany,onecolumn]{report}
+% input preamble (include additional packages, set options, define macros)
+\input{./tex/_preamble.tex}
+\loadglsentries{./tex/_defns.tex}
+\begin{document}
+	\pagenumbering{alph}
+	\include{./tex/titlepage.tex}
+	\pagenumbering{Roman}
+	\pdfbookmark[0]{\contentsname}{toc} % sets a PDF bookmark
+	\tableofcontents
+	\newcounter{romanpagecount}
+	\setcounter{romanpagecount}{\value{page}}
+	\clearpage
+	\pagenumbering{arabic}
+	
+	
+	% add content of document here
+
+ 
+    
+	\pagenumbering{Roman}
+	\setcounter{page}{\value{romanpagecount}}
+	\stepcounter{page}
+	\bibliography{IEEEabrv,mybibfile} % point BibTEX at the .bib files
+	\addcontentsline{toc}{chapter}{\bibname}
+	\listoffigures
+	\addcontentsline{toc}{chapter}{\listfigurename}
+	\listoftables
+	\addcontentsline{toc}{chapter}{\listtablename}
+	\clearpage
+	\printglossary[type=acronym] % input files created by makeindex
+	\printglossary[type=symbolslist,style=symbolsliststyle] % input files created by makeindex
+	\appendix
+	% add appendix of document here
+
+\end{document}
+% EOF

@@ -1,0 +1,32 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../main.tex
+% !TEX spellcheck = en-US
+% ****************************************************************************************
+% File: titlepage.tex
+% Author: Gadner
+% Date: 2022-09-14
+% ****************************************************************************************
+
+\thispagestyle{empty}
+\pdfbookmark[0]{Title page}{titlepage} % sets a PDF bookmark
+\thispdfpagelabel{} %  set page number shown in the tool bar of a PDF viewer
+\begin{center}
+	
+	
+	\vspace{4ex}\par
+	\textsc{\LARGE \docStudy}\par
+	\vspace{8ex}\par
+	\input{./img/titelpage/logo.tex}
+	\vspace{6ex}\par
+	\textbf{\LARGE \docType}\par
+	\vspace{8ex}\par
+	\textbf{\LARGE \docTitle}\par
+\end{center}
+\vspace{20ex}\par
+
+\par
+\docAuthor\par
+\vfill
+Last update: \today
+%EOF

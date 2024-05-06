@@ -1,0 +1,70 @@
+% !TEX TS-program = pdflatex
+% !TEX encoding = UTF-8 Unicode
+% !TEX root = ../main.tex
+% !TEX spellcheck = en-US
+% ****************************************************************************************
+% File: _defns.tex
+% Author: Gadner, Haselwanter
+% Date: 2023-09-14
+% ****************************************************************************************
+
+% list of acronyms with manual ordering
+\newacronym{acr:cad}{CAD}{computer-aided design}
+\newacronym{acr:dc}{DC}{direct current}
+\newacronym{acr:epl}{EPL}{Electronics and Power Laboratory}
+\newacronym{acr:fet}{FET}{field-effect transistor}
+\newacronym{acr:gan}{GaN}{gallium nitride}
+\newacronym{acr:ims}{IMS}{insulated metal substrate}
+\newacronym{acr:mci}{MCI}{Management Center Innsbruck}
+\newacronym{acr:matlab}{MATLAB}{matrix laboratory}
+\newacronym{acr:mlcc}{MLCC}{multilayer ceramic capacitor}
+\newacronym{acr:ntc}{NTC}{negative temperature coefficient}
+\newacronym{acr:pcb}{PCB}{printed circuit board}
+\newacronym{acr:pwm}{PWM}{pulse-width modulation}
+\newacronym{acr:rms}{RMS}{root mean square}
+
+% list of symbols with manual ordering
+% proposed strategy (numerals -> latin alphabet -> greek alphabet)
+\newglossaryentry{sym:I_nom}{%
+	name=\ensuremath{I_\mathrm{nom}},%
+	description={nominal current},%
+	unit={\unit{\ampere}},%
+	symbol={\unit{\ampere}},%
+	type={symbolslist}
+}
+\newglossaryentry{sym:L_m}{%
+	name=\ensuremath{L_\mathrm{m}},%
+	description={load inductance},%
+	unit={\unit{\henry}},%
+	symbol={\unit{\henry}},%
+	type={symbolslist}
+}
+\newglossaryentry{sym:R_m}{%
+	name=\ensuremath{R_\mathrm{m}},%
+	description={load resistance},%
+	unit={\unit{\ohm}},%
+	symbol={\unit{\ohm}},%
+	type={symbolslist}
+}
+\newglossaryentry{sym:V_DC}{%
+	name=\ensuremath{V_\mathrm{DC}},%
+	description={\gls{acr:dc} link voltage},%
+	unit={\unit{\volt}},%
+	symbol={\unit{\volt}},%
+	type={symbolslist}
+}
+\newglossaryentry{sym:omega_0}{%
+	name=\ensuremath{\omega_\mathrm{0}},%
+	description={cut-off angular frequency},%
+	unit={\unit{\per\second}},%
+	symbol={\unit{\per\second}},%
+	type={symbolslist}
+}
+\newglossaryentry{sym:delta_I_pp}{%
+	name=\ensuremath{\Delta I_\mathrm{pp}},%
+	description={peak-to-peak ripple current},%
+	unit={\unit{\ampere}},%
+	symbol={\unit{\ampere}},%
+	type={symbolslist}
+}
+% EOF

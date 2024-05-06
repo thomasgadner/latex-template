@@ -1,0 +1,77 @@
+% The angles of x,y,z-axes
+\newcounter{x}
+\newcounter{y}
+\newcounter{z}
+
+\newcommand\xaxis{210}
+\newcommand\yaxis{-30}
+\newcommand\zaxis{90}
+
+
+\definecolor{mci_orange}{RGB}{244 , 155 , 0}
+\definecolor{mci_blue}{RGB}{ 0 , 73 , 131 }
+\definecolor{mci_red}{RGB}{ 130 , 17 , 49 }
+
+
+
+\ExplSyntaxOn
+
+
+\NewExpandableDocumentCommand \randB { m }
+{
+	\fp_eval:n { randint( ceil(0.75*(#1)), floor(1.25*(#1)) ) }
+}
+
+\ExplSyntaxOff
+
+
+
+% The top side of a cube
+\newcommand\topside[3]{
+	\fill[fill=mci_orange, draw=black,shift={(\xaxis:#1)},shift={(\yaxis:#2)},
+	shift={(\zaxis:#3)}] (0,0) -- (30:1) -- (0,1) --(150:1)--(0,0);
+}
+
+% The left side of a cube
+\newcommand\leftside[3]{
+	\fill[fill=mci_red, draw=black,shift={(\xaxis:#1)},shift={(\yaxis:#2)},
+	shift={(\zaxis:#3)}] (0,0) -- (0,-1) -- (210:1) --(150:1)--(0,0);
+}
+
+% The right side of a cube
+\newcommand\rightside[3]{
+	\fill[fill=mci_blue, draw=black,shift={(\xaxis:#1)},shift={(\yaxis:#2)},
+	shift={(\zaxis:#3)}] (0,0) -- (30:1) -- (-30:1) --(0,-1)--(0,0);
+}
+
+% The cube 
+\newcommand\cube[3]{
+	\topside{#1}{#2}{#3} \leftside{#1}{#2}{#3} \rightside{#1}{#2}{#3}
+}
+
+% Definition of \planepartition
+% To draw the following plane partition, just write \planepartition{ {a, b, c}, {d,e} }.
+%  a b c
+%  d e
+\newcommand\planepartition[1]{
+	\setcounter{x}{-1}
+	\foreach \a in {#1} {
+		\addtocounter{x}{1}
+		\setcounter{y}{-1}
+		\foreach \b in \a {
+			\addtocounter{y}{1}
+			\setcounter{z}{-1}
+			\foreach \c in {1,...,\b} {
+				\addtocounter{z}{1}
+				\cube{\value{x}}{\value{y}}{\value{z}}
+			}
+		}
+	}
+}
+
+
+
+
+\begin{tikzpicture}
+		\planepartition{{\randB{6},\randB{3},\randB{2},\randB{2}},{\randB{4},\randB{2},\randB{2},\randB{1}},{\randB{3},\randB{1}},{\randB{2}}}
+\end{tikzpicture}
